@@ -1,0 +1,8 @@
+{
+  "name":"serv",
+  "version":"0.0.1",
+  "dependencies":{
+    "express":"2.4.3",
+    "mime":"1.2.2"
+  }
+}
