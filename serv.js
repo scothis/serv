@@ -2,6 +2,7 @@ var http = require('http'),
     express = require('express'),
 
 path = process.env.PWD,
+host = '127.0.0.1',
 port = process.argv[2] || 8000,
 app = express.createServer();
 
@@ -12,5 +13,5 @@ app.configure(function(){
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-console.log("Serving files from " + path + " at localhost:" + port);
-app.listen(port);
+console.log("Serving files from " + path + " at " + host + ":" + port);
+app.listen(port, host);
