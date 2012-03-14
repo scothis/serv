@@ -1,10 +1,11 @@
 {
   "name": "serv",
   "version": "0.0.1",
-  "author": "Scott Andrews <andrewss@vmware.com>",
+  "author": "Scott Andrews <scothis@gmail.com>",
   "repository": "git@github.com:scothis/serv",
   "license": "MIT",
   "dependencies": {
-    "express": "2.5.x"
-  }
+    "express": "~2.5"
+  },
+  "bin": { "serv": "./bin/serv.js" }
 }
