@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
-var http = require('http'),
-    express = require('express'),
+var http, express, path, binding, host, port, app;
 
-path = process.env.PWD,
-host = '127.0.0.1',
-port = process.argv[2] || 8000,
+http = require('http');
+express = require('express');
+
+path = process.env.PWD;
+binding = (process.argv[2] || '').split(':');
+host = binding.length > 1 ? binding[0] : '127.0.0.1';
+port = binding[binding.length - 1] || 8000;
 app = express.createServer();
 
 app.configure(function(){
-    app.use(app.router);
     app.use(express.static(path));
     app.use(express.directory(path));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
