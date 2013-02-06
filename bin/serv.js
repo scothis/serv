@@ -5,7 +5,7 @@ var http, express, path, binding, host, port, app;
 http = require('http');
 express = require('express');
 
-path = process.env.PWD;
+path = process.cwd();
 binding = (process.argv[2] || '').split(':');
 host = binding.length > 1 ? binding[0] : '127.0.0.1';
 port = binding[binding.length - 1] || 8000;

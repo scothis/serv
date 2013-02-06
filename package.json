@@ -1,11 +1,12 @@
 {
   "name": "serv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Scott Andrews <scothis@gmail.com>",
   "repository": "git@github.com:scothis/serv",
   "license": "MIT",
   "dependencies": {
     "express": "~2.5"
   },
-  "bin": { "serv": "./bin/serv.js" }
+  "bin": { "serv": "./bin/serv.js" },
+  "scripts": { "start": "./bin/serv.js" }
 }
