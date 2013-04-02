@@ -1,21 +1,54 @@
 #!/usr/bin/env node
 
-var http, express, path, binding, host, port, app;
+var http, path, express, opts, argv, mount, host, port, app;
 
 http = require('http');
+path = require('path');
 express = require('express');
 
-path = process.cwd();
-binding = (process.argv[2] || '').split(':');
-host = binding.length > 1 ? binding[0] : '127.0.0.1';
-port = binding[binding.length - 1] || 8000;
+opts = require('optimist')
+	.options('h', {
+		alias: 'help',
+		boolean: true,
+		description: 'Show this help message'
+	})
+	.options('b', {
+		alias: 'bind',
+		default: '127.0.0.1',
+		description: 'IP to bind the server to'
+	})
+	.options('p', {
+		alias: 'port',
+		default: 8000,
+		description: 'port to bin the server to'
+	})
+	.options('path', {
+		default: process.cwd(),
+		description: 'file system path to expose'
+	})
+	.options('public', {
+		boolean: true,
+		description: 'Change the dedault host to 0.0.0.0'
+	});
+argv = opts.argv;
+
+if (argv.help) {
+	opts.showHelp(console.log);
+	return;
+}
+
+//console.log(argv);
+
+mount = path.resolve(argv._[0] || argv.path);
+host = argv.public ? '0.0.0.0' : argv.host;
+port = argv.port;
 app = express.createServer();
 
 app.configure(function(){
-    app.use(express.static(path));
-    app.use(express.directory(path));
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	app.use(express.static(mount));
+	app.use(express.directory(mount));
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-console.log("Serving files from " + path + " at " + host + ":" + port);
+console.log('Serving files from ' + mount + ' at http://' + host + ':' + port);
 app.listen(port, host);
