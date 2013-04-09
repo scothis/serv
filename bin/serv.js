@@ -28,7 +28,7 @@ opts = require('optimist')
 	})
 	.options('public', {
 		boolean: true,
-		description: 'Change the dedault host to 0.0.0.0'
+		description: 'Change the default host to 0.0.0.0'
 	});
 argv = opts.argv;
 
@@ -37,10 +37,8 @@ if (argv.help) {
 	return;
 }
 
-//console.log(argv);
-
 mount = path.resolve(argv._[0] || argv.path);
-host = argv.public ? '0.0.0.0' : argv.host;
+host = argv.public ? '0.0.0.0' : argv.bind;
 port = argv.port;
 app = express.createServer();
 
