@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-var http, path, express, opts, argv, mount, host, port, app;
+var serv, opts, argv;
 
-http = require('http');
-path = require('path');
-express = require('express');
+serv = require('../serv');
 
 opts = require('optimist')
 	.options('h', {
@@ -37,16 +35,6 @@ if (argv.help) {
 	return;
 }
 
-mount = path.resolve(argv._[0] || argv.path);
-host = argv.public ? '0.0.0.0' : argv.bind;
-port = argv.port;
-app = express.createServer();
+argv.path = argv._[0] || argv.path;
 
-app.configure(function(){
-	app.use(express.static(mount));
-	app.use(express.directory(mount));
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-console.log('Serving files from ' + mount + ' at http://' + host + ':' + port);
-app.listen(port, host);
+serv(argv);

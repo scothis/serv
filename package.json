@@ -1,6 +1,6 @@
 {
   "name": "serv",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Scott Andrews <scothis@gmail.com>",
   "repository": "git@github.com:scothis/serv",
   "license": "MIT",
@@ -9,5 +9,6 @@
     "optimist": "~0.3"
   },
   "bin": { "serv": "./bin/serv.js" },
-  "scripts": { "start": "./bin/serv.js" }
+  "scripts": { "start": "./bin/serv.js" },
+  "main": "serv.js"
 }
