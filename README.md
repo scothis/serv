@@ -1,5 +1,5 @@
-Serv Read Me
-============
+Serv
+====
 
 Ad hoc serving of HTTP requests from any directory.
 
