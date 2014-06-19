@@ -4,7 +4,7 @@ Serv Read Me
 Ad hoc serving of HTTP requests from any directory.
 
     $ npm install -g serv
-    $ cd directory/to/serv; serv
+    $ cd directory/to/serv
     $ serv
     Serving files from directory/to/serv at http://127.0.0.1:8000
 
