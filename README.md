@@ -3,12 +3,10 @@ Serv Read Me
 
 Ad hoc serving of HTTP requests from any directory.
 
-    npm install -g
-
-    cd directory/to/serv; serv
-
+    $ npm install -g serv
+    $ cd directory/to/serv; serv
     $ serv
-    Serving files from /Users/scothis/Development/cujojs at http://127.0.0.1:8000
+    Serving files from directory/to/serv at http://127.0.0.1:8000
 
 By default, serv only allows access from the local machine. This protects your
 file system from external network access. If remote access is needed, you may
