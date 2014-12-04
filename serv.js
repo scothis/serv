@@ -18,7 +18,18 @@ module.exports = function serv(opts) {
 		app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	});
 
-	console.log('Serving files from ' + mount + ' at http://' + host + ':' + port);
+	app.on('listening', function() {
+		console.log('Serving files from ' + mount + ' at http://' + host + ':' + port);
+	});
+
+	app.on('error', function(error) {
+		if (error.code !== 'EADDRINUSE') {
+			throw error;
+		}
+		port += 1;
+		app.listen(port, host);
+	});
+
 	app.listen(port, host);
 
 };
