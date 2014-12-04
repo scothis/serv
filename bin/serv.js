@@ -18,15 +18,15 @@ opts = require('optimist')
 	.options('p', {
 		alias: 'port',
 		default: process.env.PORT || 'Auto (8000+)',
-		description: 'port to bind the server to, uses PORT env var if set'
+		description: 'Port to bind the server to, uses PORT env var if set'
 	})
 	.options('path', {
 		default: process.cwd(),
-		description: 'file system path to expose'
+		description: 'File system path to expose'
 	})
 	.options('public', {
 		boolean: true,
-		description: 'Change the default host to 0.0.0.0'
+		description: 'Listen on all available IP addresses'
 	});
 argv = opts.argv;
 
