@@ -17,6 +17,6 @@ network access. Access may still be limited by your machine's firewall.
     Options:
       -h, --help  Show this help message                               [boolean]
       -b, --bind  IP to bind the server to                             [default: "127.0.0.1"]
-      -p, --port  port to bin the server to, uses PORT env var if set  [default: 8000]
+      -p, --port  port to bind the server to, uses PORT env var if set [default: "Auto (8000+)"]
       --path      file system path to expose                           [default: <current working directory>]
       --public    Change the default host to 0.0.0.0                   [boolean]
