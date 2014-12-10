@@ -1,8 +1,10 @@
-var http, path, express;
+var http, open, path, express, keypress;
 
 http = require('http');
+open = require('open');
 path = require('path');
 express = require('express');
+keypress = require('keypress');
 
 module.exports = function serv(opts) {
 	var mount, host, port, app, isUserSpecifiedPort;
@@ -20,7 +22,33 @@ module.exports = function serv(opts) {
 	});
 
 	app.on('listening', function() {
-		console.log('Serving files from ' + mount + ' at http://' + host + ':' + port);
+		var url;
+		if (host === '127.0.0.1' || host === '0.0.0.0') {
+			url = 'http://localhost:' + port
+		} else {
+			url = 'http://' + host + ':' + port
+		}
+		console.log('Serving files from ' + mount + ' at ' + url);
+		console.log('Press Ctrl+L to launch in browser');
+		console.log('Press Ctrl+C to quit');
+
+		keypress(process.stdin);
+
+		process.stdin.on('keypress', function(ch, key) {
+			if (!key) {
+				return;
+			}
+			if (key.ctrl && key.name === 'c') {
+				process.exit();
+			}
+			if (key.ctrl && key.name === 'l') {
+				console.log('Launching ' + url + '/');
+				open(url + '/');
+			}
+		});
+
+		process.stdin.setRawMode(true);
+		process.stdin.resume();
 	});
 
 	app.on('error', function(error) {

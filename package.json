@@ -12,9 +12,15 @@
   "license": "MIT",
   "dependencies": {
     "express": "~2.5",
+    "keypress": "^0.2.1",
+    "open": "0.0.5",
     "optimist": "~0.3"
   },
-  "bin": { "serv": "./bin/serv.js" },
-  "scripts": { "start": "./bin/serv.js" },
+  "bin": {
+    "serv": "./bin/serv.js"
+  },
+  "scripts": {
+    "start": "./bin/serv.js"
+  },
   "main": "serv.js"
 }
