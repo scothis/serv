@@ -1,11 +1,14 @@
 {
   "name": "serv",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "author": "Scott Andrews <scothis@gmail.com>",
   "contributors": [
     "Simon Sturmer <sstur@me.com>"
   ],
-  "repository": "git@github.com:scothis/serv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scothis/serv.git"
+  },
   "license": "MIT",
   "dependencies": {
     "express": "~2.5",
