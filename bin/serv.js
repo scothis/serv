@@ -17,8 +17,8 @@ opts = require('optimist')
 	})
 	.options('p', {
 		alias: 'port',
-		default: process.env.PORT || 8000,
-		description: 'port to bin the server to, uses PORT env var if set'
+		default: process.env.PORT || 'Auto (8000+)',
+		description: 'port to bind the server to, uses PORT env var if set'
 	})
 	.options('path', {
 		default: process.cwd(),
