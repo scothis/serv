@@ -24,9 +24,9 @@ module.exports = function serv(opts) {
 	app.on('listening', function() {
 		var url;
 		if (host === '127.0.0.1' || host === '0.0.0.0') {
-			url = 'http://localhost:' + port
+			url = 'http://localhost:' + port + '/';
 		} else {
-			url = 'http://' + host + ':' + port
+			url = 'http://' + host + ':' + port + '/';
 		}
 		console.log('Serving files from ' + mount + ' at ' + url);
 		console.log('Press Ctrl+L to launch in browser');
@@ -42,8 +42,8 @@ module.exports = function serv(opts) {
 				process.exit();
 			}
 			if (key.ctrl && key.name === 'l') {
-				console.log('Launching ' + url + '/');
-				open(url + '/');
+				console.log('Launching ' + url);
+				open(url);
 			}
 		});
 
