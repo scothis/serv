@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-var serv, opts, argv;
+var serv, opts, argv, pkg;
 
 serv = require('../serv');
+pkg = require('../package.json');
 
 opts = require('optimist')
 	.options('h', {
@@ -20,6 +21,10 @@ opts = require('optimist')
 		default: process.env.PORT || 'Auto (8000+)',
 		description: 'Port to bind the server to, uses PORT env var if set'
 	})
+	.options('v', {
+		alias: 'version',
+		description: 'serv version'
+	})
 	.options('path', {
 		default: process.cwd(),
 		description: 'File system path to expose'
@@ -32,6 +37,11 @@ argv = opts.argv;
 
 if (argv.help) {
 	opts.showHelp(console.log);
+	return;
+}
+
+if (argv.version) {
+	console.log('serv %s', pkg.version);
 	return;
 }
 
