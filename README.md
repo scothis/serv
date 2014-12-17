@@ -17,8 +17,9 @@ network access. Access may still be limited by your machine's firewall.
 
     $ serv -h
     Options:
-      -h, --help  Show this help message                               [boolean]
-      -b, --bind  IP to bind the server to                             [default: "127.0.0.1"]
-      -p, --port  Port to bind the server to, uses PORT env var if set [default: "Auto (8000+)"]
-      --path      File system path to expose                           [default: <current working directory>]
-      --public    Listen on all available IP addresses                 [boolean]
+      -h, --help     Show this help message                               [boolean]
+      -b, --bind     IP to bind the server to                             [default: "127.0.0.1"]
+      -p, --port     Port to bind the server to, uses PORT env var if set [default: "Auto (8000+)"]
+      -v, --version  serv version
+      --path         File system path to expose                           [default: <current working directory>]
+      --public       Listen on all available IP addresses                 [boolean]
