@@ -41,7 +41,7 @@ if (argv.help) {
 }
 
 if (argv.version) {
-	console.log(pkg.version);
+	console.log('serv %s', pkg.version);
 	return;
 }
 
