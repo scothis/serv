@@ -39,12 +39,22 @@ module.exports = function serv(opts) {
 				return;
 			}
 			if (key.ctrl && key.name === 'c') {
-				process.exit();
+				process.kill(process.pid, 'SIGINT');
 			}
 			if (key.ctrl && key.name === 'l') {
 				console.log('Launching ' + url);
 				open(url);
 			}
+		});
+
+		process.on('SIGINT', function() {
+			process.exit(0);
+		});
+		process.on('SIGTERM', function() {
+			process.exit(0);
+		});
+		process.on('SIGTTOU', function() {
+			process.stdin.pause();
 		});
 
 		process.stdin.setRawMode(true);
