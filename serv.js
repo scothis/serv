@@ -1,18 +1,16 @@
-var http, open, path, express, keypress;
+var http, path, express;
 
 http = require('http');
-open = require('open');
 path = require('path');
 express = require('express');
-keypress = require('keypress');
 
 module.exports = function serv(opts) {
-	var mount, host, port, app, isUserSpecifiedPort;
+	var mount, host, port, app;
 
-	mount = path.resolve(opts.path);
-	host = opts.public ? '0.0.0.0' : opts.bind;
-	isUserSpecifiedPort = (typeof opts.port === 'number');
-	port = isUserSpecifiedPort ? opts.port : 8000;
+	opts = opts || {};
+	mount = opts.path = path.resolve(opts.path || '');
+	host = opts.bind = opts.public ? '0.0.0.0' : opts.bind;
+	port = opts.port = typeof opts.port === 'number' ? opts.port : 8000;
 
 	app = express.createServer();
 	app.configure(function(){
@@ -21,55 +19,10 @@ module.exports = function serv(opts) {
 		app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 	});
 
-	app.on('listening', function() {
-		var url;
-		if (host === '127.0.0.1' || host === '0.0.0.0') {
-			url = 'http://localhost:' + port + '/';
-		} else {
-			url = 'http://' + host + ':' + port + '/';
-		}
-		console.log('Serving files from ' + mount + ' at ' + url);
-		console.log('Press Ctrl+L to launch in browser');
-		console.log('Press Ctrl+C to quit');
+	var listen = app.listen;
+	app.listen = function () {
+		listen.call(app, arguments[0] || port, arguments[1] || host);
+	};
 
-		keypress(process.stdin);
-
-		process.stdin.on('keypress', function(ch, key) {
-			if (!key) {
-				return;
-			}
-			if (key.ctrl && key.name === 'c') {
-				process.kill(process.pid, 'SIGINT');
-			}
-			if (key.ctrl && key.name === 'l') {
-				console.log('Launching ' + url);
-				open(url);
-			}
-		});
-
-		process.on('SIGINT', function() {
-			process.exit(0);
-		});
-		process.on('SIGTERM', function() {
-			process.exit(0);
-		});
-		process.on('SIGTTOU', function() {
-			process.stdin.pause();
-		});
-
-		process.stdin.setRawMode(true);
-		process.stdin.resume();
-	});
-
-	app.on('error', function(error) {
-		if (error.code === 'EADDRINUSE' && !isUserSpecifiedPort) {
-			port += 1;
-			app.listen(port, host);
-		} else {
-			throw error;
-		}
-	});
-
-	app.listen(port, host);
-
+	return app;
 };

@@ -23,3 +23,18 @@ network access. Access may still be limited by your machine's firewall.
       -v, --version  serv version
       --path         File system path to expose                           [default: <current working directory>]
       --public       Listen on all available IP addresses                 [boolean]
+
+Direct API access is also available:
+```js
+var serv = require('serv');
+var app = serv({
+    // use long flag names (i.e. use 'port' instead of 'p')
+    port: 8000
+});
+app.listen(); // may optionally override the port and host
+...
+app.close();
+```
+
+Note: direct API usage will not automatically look for an open port. That
+feature is only available from the shell.
