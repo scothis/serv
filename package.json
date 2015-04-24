@@ -1,6 +1,6 @@
 {
   "name": "serv",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": "Scott Andrews <scothis@gmail.com>",
   "contributors": [
     "Simon Sturmer <sstur@me.com>"
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "~2.5",
-    "keypress": "^0.2.1",
+    "keypress": "~0.2",
     "open": "0.0.5",
     "optimist": "~0.3"
   },
